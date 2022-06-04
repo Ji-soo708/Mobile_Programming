@@ -11,6 +11,7 @@ import com.example.kulendar.home.HomeFragment
 
 class MainActivity2 : AppCompatActivity() {
 
+    /////////////BottomNavigation 액티비티//////////////////
     override fun onCreate(savedInstanceState: Bundle?) {
 
         //BottomNavigation 구현 코드

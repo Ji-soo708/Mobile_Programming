@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "944109730185",
+    "project_id": "registerproject-1e764",
+    "storage_bucket": "registerproject-1e764.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944109730185:android:3547deb4f5742b082ec958",
+        "android_client_info": {
+          "package_name": "com.example.kulendar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944109730185-565dapq0k690cm0vvu3palc3sf15hkfn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kulendar",
+            "certificate_hash": "7c74355478475c8db2ff45cdbcabe4fc6c387d33"
+          }
+        },
+        {
+          "client_id": "944109730185-gpt3g76rjvu32tr9hlmb18rlqhkm3s1i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCADUbgoH4JA8KNOnsYWwxjKCPpcF1O0SA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944109730185-gpt3g76rjvu32tr9hlmb18rlqhkm3s1i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

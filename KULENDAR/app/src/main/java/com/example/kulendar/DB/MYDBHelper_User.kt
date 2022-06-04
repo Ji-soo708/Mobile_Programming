@@ -1,9 +1,11 @@
 package com.example.kulendar.DB
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
+///////////////////회원가입, 로그인 사용안함///////////////////////
 class MYDBHelper_User(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     companion object{
         val DB_NAME="user.db"
@@ -14,7 +16,21 @@ class MYDBHelper_User(val context: Context) : SQLiteOpenHelper(context, DB_NAME,
         val User_name="user_name"
         val User_department="user_department"
         val User_email="user_email"
-        val User_timetable="user_timetable"
+
+    }
+
+    fun insert(user: User):Boolean{
+        val values = ContentValues()
+        values.put(User_email, user.User_email)
+        values.put(User_pw, user.User_pw)
+        values.put(User_name, user.User_name)
+        values.put(User_department, user.User_department)
+        val db = writableDatabase
+        val flag = db.insert(TABLE_NAME, null, values)>0
+        db.close()
+        return flag
+
+
 
     }
     fun getAllRecord(){
@@ -28,12 +44,11 @@ class MYDBHelper_User(val context: Context) : SQLiteOpenHelper(context, DB_NAME,
 
     override fun onCreate(db: SQLiteDatabase?) {
         val create_table = "create table if not exists $TABLE_NAME("+
-                "$User_id text primary key, "+
+                "$User_id integer primary key autoincrement, "+
+                "$User_email text, "+
                 "$User_pw text, "+
                 "$User_name text, "+
-                "$User_department text, "+
-                "$User_email text, "+
-                "$User_timetable text);"
+                "$User_department text);"
         db!!.execSQL(create_table)
     }
 

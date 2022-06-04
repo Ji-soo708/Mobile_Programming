@@ -1,3 +1,17 @@
 package com.example.kulendar.DB
 
-data class User(var User_id:Char, var User_pw:Char, var User_name:Char, var User_department:Char, var User_email:Char, var User_timetable:Char)
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+
+
+@Entity(tableName = "UserTable")
+data class User(
+    var User_email:String,
+    var User_pw:String,
+    var User_name:String,
+    var User_department:String,
+    var User_timetable:String
+    ){
+    @PrimaryKey(autoGenerate = true) var id : Int = 0
+}
