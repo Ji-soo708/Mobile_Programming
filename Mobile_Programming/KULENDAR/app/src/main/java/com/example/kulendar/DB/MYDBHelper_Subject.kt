@@ -1,8 +1,10 @@
 package com.example.kulendar.DB
-
+import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
 class MYDBHelper_Subject(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     companion object{
@@ -15,11 +17,24 @@ class MYDBHelper_Subject(val context: Context) : SQLiteOpenHelper(context, DB_NA
         val SubProf="SubProf"
         val SubScore="SubScore"
     }
+    @SuppressLint("Range")
     fun getAllRecord(){
         val strsql = "select * from $TABLE_NAME;"
         val db = readableDatabase
         val cursor = db.rawQuery(strsql, null)
         //showRecord(cursor)
+        while(cursor.moveToNext()){
+            var SubNum=cursor.getString(cursor.getColumnIndex("SubNum"))
+            var SubName=cursor.getString(cursor.getColumnIndex("SubName"))
+            var SubTime=cursor.getString(cursor.getColumnIndex("SubTime"))
+            var SubProf=cursor.getString(cursor.getColumnIndex("SubProf"))
+            var SubScore=cursor.getString(cursor.getColumnIndex("SubScore"))
+            Log.i("db",SubNum)
+            Log.i("db",SubName)
+            Log.i("db",SubTime)
+            Log.i("db",SubProf)
+            Log.i("db",SubScore)
+        }
         cursor.close()
         db.close()
     }
@@ -38,5 +53,31 @@ class MYDBHelper_Subject(val context: Context) : SQLiteOpenHelper(context, DB_NA
         val drop_table = "drop table if exists $TABLE_NAME;"
         db!!.execSQL(drop_table)
         onCreate(db)
+    }
+    fun findProduct(num:String):Boolean{
+        val strsql="select * from $TABLE_NAME where $SubNum='$num';"
+        val db=readableDatabase
+        val cursor=db.rawQuery(strsql,null)
+        val flag=cursor.count!=0
+        cursor.close()
+        db.close()
+        return flag
+    }
+    fun insertProduct(subject:Subject):Boolean{
+        val values= ContentValues()
+        values.put(SubName,subject.SubName)
+        values.put(SubNum,subject.SubNum)
+        values.put(SubProf,subject.Professor)
+        values.put(SubTime,subject.SubTime)
+        values.put(SubScore,subject.Score)
+        val db=writableDatabase
+        if(db.insert(TABLE_NAME,null,values)>0){
+            db.close()
+            return true
+        }
+        else {
+            db.close()
+            return false
+        }
     }
 }
