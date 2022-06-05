@@ -6,55 +6,20 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="fff" />
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="warn" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8eb3b911-a0a5-4501-8080-2e59a2520b4d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kulendar/DB/Timetable.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kulendar/DB/UserDao.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kulendar/DB/UserDatabase.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kulendar/Login/ApplicationClass.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kulendar/Login/GMailSender.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kulendar/Login/MainActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kulendar/Login/RegisterActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kulendar/DB/MYDBHelper_User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kulendar/DB/MYDBHelper_User.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kulendar/DB/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kulendar/DB/User.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kulendar/LoginActivity.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kulendar/MainActivity.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kulendar/MainActivity2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kulendar/Login/MainActivity2.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kulendar/RegisterActivity.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kulendar/alarm/AlarmFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kulendar/alarm/AlarmFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kulendar/alarm/AlarmVPAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kulendar/alarm/AlarmVPAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kulendar/home/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kulendar/home/HomeFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kulendar/home/HomeTab1Fragment.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kulendar/home/HomeTab2Fragment.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kulendar/home/HomeVPAdapter.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_login.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_main2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_register.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_register.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_home_tab1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_home_tab2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../build.gradle" afterDir="false" />
-    </list>
+    <list default="true" id="8eb3b911-a0a5-4501-8080-2e59a2520b4d" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\dlawo\.android\avd\Nexus_5_API_30_23.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\dlawo\.android\avd\Nexus_5_API_30_24.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -88,8 +53,16 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+        <option value="layoutResourceFile" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="ProjectId" id="2A4k6aWMvtYZw6vNCR9ZlPaLZJN" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -104,6 +77,11 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.1473793275">
+      <recent name="com.example.kulendar" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
