@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/fragment_alarm_tab1.xml" value="0.16458333333333333" />
+        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/fragment_alarm_tab2.xml" value="0.16458333333333333" />
+        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/fragment_calendar.xml" value="0.16458333333333333" />
+        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/fragment_dday_framgent.xml" value="0.16458333333333333" />
+        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/fragment_table.xml" value="0.264" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

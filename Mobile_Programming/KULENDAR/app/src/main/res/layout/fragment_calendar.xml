@@ -30,64 +30,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="15dp"
                 android:layout_gravity="center_horizontal"/>
-            <LinearLayout
-                android:layout_width="315dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:background="@drawable/border">
-
-                <TextView
-                    android:id="@+id/timetable1"
-                    android:layout_width="35dp"
-                    android:layout_height="45dp"
-                    android:background="#FFEB3B" />
-                <TextView
-                    android:id="@+id/timetable2"
-                    android:layout_width="35dp"
-                    android:layout_height="45dp"
-                    android:background="#FFEB3B" />
-                <TextView
-                    android:id="@+id/timetable3"
-                    android:layout_width="35dp"
-                    android:layout_height="45dp"
-                    android:background="@color/white" />
-                <TextView
-                    android:id="@+id/timetable4"
-                    android:layout_width="35dp"
-                    android:layout_height="45dp"
-                    android:background="@color/white" />
-
-                <TextView
-                    android:id="@+id/timetable5"
-                    android:layout_width="35dp"
-                    android:layout_height="45dp"
-                    android:background="#C57892" />
-                <TextView
-                    android:id="@+id/timetable6"
-                    android:layout_width="35dp"
-                    android:layout_height="45dp"
-                    android:background="#C57892" />
-
-                <TextView
-                    android:id="@+id/timetable7"
-                    android:layout_width="35dp"
-                    android:layout_height="45dp"
-                    android:background="#9CD3DA" />
-                <TextView
-                    android:id="@+id/timetable8"
-                    android:layout_width="35dp"
-                    android:layout_height="45dp"
-                    android:background="@color/white" />
-                <TextView
-                    android:id="@+id/timetable9"
-                    android:layout_width="35dp"
-                    android:layout_height="45dp"
-                    android:background="@color/white" />
-
-
-            </LinearLayout>
+            <Button
+                android:id="@+id/btn_ttable"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="15dp"
+                android:text="시간표"
+                android:backgroundTint="#8CC549"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
