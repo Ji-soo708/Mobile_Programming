@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.widget.*
 import com.example.kulendar.DB.User
@@ -123,11 +124,11 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this,"비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT).show()
             return
         }
-        if(binding.regeditName.text.toString().isEmpty()){
+        if((binding.regeditName.text.toString()).trim().length<=0){
             Toast.makeText(this, "이름을 입력하세요.",Toast.LENGTH_SHORT).show()
             return
         }
-        if(binding.regeditRech.text.toString().isEmpty()){
+        if((binding.regAutoComplete.text.toString()).trim().length<=0){
             Toast.makeText(this, "학과를 입력하세요.",Toast.LENGTH_SHORT).show()
             return
         }
