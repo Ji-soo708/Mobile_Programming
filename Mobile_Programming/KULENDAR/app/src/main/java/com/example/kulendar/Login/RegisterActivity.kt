@@ -112,7 +112,7 @@ class RegisterActivity : AppCompatActivity() {
         val name : String = binding.regeditName.text.toString()
         val dep : String = binding.regAutoComplete.text.toString()
 
-        return User(email, pw,name,dep,"")
+        return User(email, pw,name,dep)
     }
 
     private fun signUp(){
