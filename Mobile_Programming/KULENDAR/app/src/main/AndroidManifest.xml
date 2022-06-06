@@ -14,9 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KULENDAR"
         android:usesCleartextTraffic="true" >
-        <activity
-            android:name=".TimetableActivity"
-            android:exported="false" />
+
+<!--       스플래쉬 설정-->
+
+        <activity android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+<!--        <activity-->
+<!--            android:name=".TimetableActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".Login.MainActivity2"
             android:exported="false" />
@@ -31,13 +42,13 @@
         <activity
             android:name=".Login.MainActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
-        <activity android:name=".TableActivity"></activity>
+        <activity android:name=".TableActivity" />
     </application>
 
 </manifest>

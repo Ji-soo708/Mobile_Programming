@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/first" app:showAsAction="ifRoom" android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground" android:title="Home" />
+        android:icon="@drawable/ic_home" android:title="Home" />
     <item android:id="@+id/second" app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_launcher_foreground" android:title="Calendar" />
+        android:icon="@drawable/ic_baseline_calendar_today_24" android:title="Calendar" />
     <item android:id="@+id/third" app:showAsAction="ifRoom"
-        android:enabled="true" android:icon="@drawable/ic_launcher_foreground" android:title="D-day" />
+        android:enabled="true" android:icon="@drawable/ic_baseline_brightness_5_24" android:title="D-day" />
     <item android:id="@+id/forth" app:showAsAction="ifRoom"
-        android:enabled="true" android:icon="@drawable/ic_launcher_foreground" android:title="Alarm" />
+        android:enabled="true" android:icon="@drawable/ic_baseline_access_alarm_24" android:title="Alarm" />
 </menu>

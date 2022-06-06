@@ -10,8 +10,7 @@ data class User(
     var User_email:String,
     var User_pw:String,
     var User_name:String,
-    var User_department:String,
-    var User_timetable:String
+    var User_department:String
 ){
     @PrimaryKey(autoGenerate = true) var id : Int = 0
 }
