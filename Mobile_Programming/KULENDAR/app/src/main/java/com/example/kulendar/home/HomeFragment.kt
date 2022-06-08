@@ -47,8 +47,6 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val email = arguments?.getString("EMAIL")
-        Log.d("정보광장 이메일 ","${email} 도착")
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         init()
         return binding.root

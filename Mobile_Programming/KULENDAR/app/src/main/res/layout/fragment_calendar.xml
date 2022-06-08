@@ -33,10 +33,11 @@
             <Button
                 android:id="@+id/btn_ttable"
                 android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="15dp"
                 android:text="시간표"
+                android:background="@drawable/edit_round"
                 android:backgroundTint="#8CC549"/>
 
             <LinearLayout
@@ -52,11 +53,12 @@
                     android:textSize="18sp"
                     android:textStyle="bold"/>
                 <Button
-                    android:layout_width="70dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
                     android:text="추가"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:backgroundTint="#8CC549"
+                    android:background="@drawable/edit_round"
                     android:textColor="@color/white"
                     android:layout_marginTop="12dp"
                     android:layout_marginStart="190dp"/>

@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="30dp"
-        android:background="@drawable/border">
+        android:background="@drawable/edit_round">
 
         <TextView
             android:layout_width="20dp"
