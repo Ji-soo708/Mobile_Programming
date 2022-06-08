@@ -57,4 +57,21 @@ class MYDBHelper_User(val context: Context) : SQLiteOpenHelper(context, DB_NAME,
         db!!.execSQL(drop_table)
         onCreate(db)
     }
+
+    fun getID(): Int {
+        var userid=-1
+        val strsql = "select * from $TABLE_NAME;"
+        val db = readableDatabase
+        val cursor = db.rawQuery(strsql, null)
+        cursor.moveToFirst()
+        if(cursor.getCount()>0){
+            while (cursor.moveToNext()){
+                userid=-3
+                userid=cursor.getInt(0)
+            }
+        }
+        cursor.close()
+        db.close()
+        return userid
+    }
 }
