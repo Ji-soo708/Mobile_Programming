@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/drawable/border.xml" value="0.159" />
-        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/drawable/edit_line.xml" value="0.159" />
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/drawable/edit_round.xml" value="0.103" />
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/drawable/ic_mypage.xml" value="0.1" />
+
+
+        <entry key="..\:/Users/dvd33/gitfin/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_table.xml" value="0.1" />
+        <entry key="..\:/Users/dvd33/gitfin/Mobile_Programming/KULENDAR/app/src/main/res/layout/subrow.xml" value="0.1" />
+
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_main2.xml" value="0.1082427536231884" />
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_register.xml" value="0.15534420289855072" />
