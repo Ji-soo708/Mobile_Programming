@@ -47,7 +47,7 @@ class HomeRecyclerViewAdapter(val items:ArrayList<MyNotice>): RecyclerView.Adapt
         }
     }
     interface OnItemClickListener{
-        fun onItemClick(position: Int)
+        fun onItemClick(position: Int){}
     }
 
     var nItemClickListener: OnItemClickListener?=null
@@ -64,10 +64,14 @@ class HomeRecyclerViewAdapter(val items:ArrayList<MyNotice>): RecyclerView.Adapt
         if(filteredNotice.isEmpty()) {
             holder.binding.noticeType.text=items[position].notice_Type
             holder.binding.noticeTitle.text=items[position].notice_Title
+
+
         }
         else {
+
             holder.binding.noticeType.text = filteredNotice[position].notice_Type
             holder.binding.noticeTitle.text = filteredNotice[position].notice_Title
+
         }
     }
 
@@ -87,6 +91,7 @@ class HomeRecyclerViewAdapter(val items:ArrayList<MyNotice>): RecyclerView.Adapt
     override fun getFilter(): Filter {
         return itemFilter
     }
+
 }
 
 
