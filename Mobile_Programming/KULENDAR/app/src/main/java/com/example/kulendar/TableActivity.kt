@@ -1,5 +1,7 @@
 package com.example.kulendar
 
+import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,12 +11,15 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kulendar.DB.MYDBHelper_Subject
+import com.example.kulendar.DB.MyDBHelper_TimeTable
 import com.example.kulendar.databinding.ActivityTableBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,12 +27,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import org.json.simple.parser.ParseException
+import org.w3c.dom.Text
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
+import java.security.AccessController.getContext
 import java.util.*
 import javax.security.auth.Subject
 import kotlin.collections.ArrayList
@@ -37,6 +44,8 @@ import kotlin.collections.HashMap
 class TableActivity : AppCompatActivity() {
     lateinit var binding: ActivityTableBinding
     lateinit var myDbHelper: MYDBHelper_Subject
+    lateinit var TimeDbHelper:MyDBHelper_TimeTable
+    lateinit var SubDbHelper:MYDBHelper_Subject
     lateinit var kindKey:String
     lateinit var univKey:String
     lateinit var sustKey:String
@@ -65,30 +74,416 @@ class TableActivity : AppCompatActivity() {
     var KU = arrayListOf("실감미디어콘텐츠융합전공","실감미디어공학융합전공" )
     ///////////////////
     val scope= CoroutineScope(Dispatchers.IO)
+    lateinit var userid:String
+
     lateinit var myAdapter:subjectAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityTableBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userid = intent.getStringExtra("calendar email")!!
+        if(userid != null){
+            Log.d("도착 완료: ",userid)
+        }
         init()
         initdata()
         initCodedata()
         initSpinner()
+        initTimetable()
+
         binding.button.setOnClickListener {
+            myAdapter.items.clear()
             main()
         }
 
     }
+    fun deleteDB(user:String, num:String){
 
+        var result=TimeDbHelper.deleteProduct(user,num)
+        if(result==true){
+            Toast.makeText(applicationContext,"과목 삭제 성공.",Toast.LENGTH_SHORT).show()
+        }
+        else{
+            Toast.makeText(applicationContext,"과목 삭제 실패.",Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun deleteTimeTable(deletetime:MutableList<String>){
+        var startt=""
+        var endt=""
+        for(j in 0 until deletetime.size) {
+            deletetime[j] = deletetime[j].replace(" ", "")
+            if (j % 3 == 0) {
+                Log.i("delete",deletetime[j])
+                if (deletetime[j][0] == '월') {
+                    startt = "mon" + deletetime[j].substring(1, deletetime[j].length)
+                } else if (deletetime[j][0] == '화') {
+                    startt = "tue" + deletetime[j].substring(1, deletetime[j].length)
+                } else if (deletetime[j][0] == '수') {
+                    startt = "wen" + deletetime[j].substring(1, deletetime[j].length)
+                } else if (deletetime[j][0] == '목') {
+                    startt = "thu" + deletetime[j].substring(1, deletetime[j].length)
+                } else if (deletetime[j][0] == '금') {
+                    startt = "fri" + deletetime[j].substring(1, deletetime[j].length)
+                }
+
+            } else if (j % 3 == 1) {
+                endt = startt.substring(0, 3) + deletetime[j]
+            } else {
+                val count = endt.substring(endt.length - 1, startt.length).toInt() - startt.substring(
+                    endt.length - 1,
+                    endt.length
+                ).toInt()
+                val date = startt.substring(0, 3)
+                val getID = applicationContext.resources.getIdentifier(
+                    startt,
+                    "id",
+                    applicationContext.packageName
+                )
+                var tv = findViewById<TextView>(getID);
+                tv.setText("1")
+                tv.setBackgroundColor(Color.parseColor("#ffffff"))
+                tv.setOnClickListener { }
+                for (i in 1 until count) {
+                    var timeid: String
+                    var timenum = startt.substring(endt.length - 1, endt.length).toInt() + i
+                    if (timenum.toString().length == 1) {
+                        timeid = date + "0" + timenum.toString()
+                        val getID1 = applicationContext.resources.getIdentifier(
+                            timeid,
+                            "id",
+                            applicationContext.packageName
+                        )
+                        var tv1 = findViewById<TextView>(getID1);
+                        tv1.setText("1")
+                        tv1.setBackgroundColor(Color.parseColor("#ffffff"))
+                        tv1.setOnClickListener { }
+                    } else {
+                        timeid = date + timenum.toString()
+                        val getID1 = applicationContext.resources.getIdentifier(
+                            timeid,
+                            "id",
+                            applicationContext.packageName
+                        )
+                        var tv1 = findViewById<TextView>(getID1);
+                        tv1.setText("1")
+                        tv1.setBackgroundColor(Color.parseColor("#ffffff"))
+                        tv1.setOnClickListener { }
+
+                    }
+                }
+                val getID2 = applicationContext.resources.getIdentifier(
+                    endt,
+                    "id",
+                    applicationContext.packageName
+                )
+                var tv2 = findViewById<TextView>(getID2);
+                tv2.setText("1")
+                tv2.setBackgroundColor(Color.parseColor("#ffffff"))
+                tv2.setOnClickListener { }
+                initTimetable()
+            }
+
+        }
+
+    }
+    fun timtableColor(name:String,time1:String,time2:String,room:String,rcolor:Int,num:String,deletetime:MutableList<String>){
+        val count=time2.substring(time2.length-1,time2.length).toInt()-time1.substring(time2.length-1,time2.length).toInt()
+        val date=time1.substring(0,3)
+        val getID=applicationContext.resources.getIdentifier(time1,"id",applicationContext.packageName)
+        var tv=findViewById<TextView>(getID);
+        tv.setText(name+"강의실:"+room)
+        tv.setBackgroundColor(rcolor)
+        tv.setOnClickListener {
+            var builder=AlertDialog.Builder(this)
+            builder.setTitle("시간표 삭제")
+            builder.setMessage("해당 과목을 삭제하시겠습니까 ?")
+            builder.setIcon(R.drawable.logo)
+            var listener=object:DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    when(which) {
+                        DialogInterface.BUTTON_POSITIVE -> {
+                            deleteDB(userid,num)
+                            deleteTimeTable(deletetime)
+                        }
+                        DialogInterface.BUTTON_NEGATIVE->{
+                            Toast.makeText(applicationContext,"해당 시간표를 유지합니다",Toast.LENGTH_SHORT).show()
+
+                        }
+                    }
+                }
+            }
+            builder.setPositiveButton("예", listener)
+            builder.setNegativeButton("아니오", listener)
+            builder.show()
+
+        }
+
+
+        for(i in 1 until count){
+            var timeid:String
+            var timenum=time1.substring(time2.length-1,time2.length).toInt()+i
+            if(timenum.toString().length==1){
+                timeid=date+"0"+timenum.toString()
+                val getID1=applicationContext.resources.getIdentifier(timeid,"id",applicationContext.packageName)
+                var tv1=findViewById<TextView>(getID1);
+                tv1.setText(name+"강의실:"+room)
+                tv1.setBackgroundColor(rcolor)
+                tv1.setOnClickListener {var builder=AlertDialog.Builder(this)
+                    builder.setTitle("시간표 삭제")
+                    builder.setMessage("해당 과목을 삭제하시겠습니까 ?")
+                    builder.setIcon(R.drawable.logo)
+                    var listener=object:DialogInterface.OnClickListener{
+                        override fun onClick(dialog: DialogInterface?, which: Int) {
+                            when(which) {
+                                DialogInterface.BUTTON_POSITIVE -> {
+                                    deleteDB(userid,num)
+                                    deleteTimeTable(deletetime)
+
+                                }
+                                DialogInterface.BUTTON_NEGATIVE->{
+                                    Toast.makeText(applicationContext,"해당 시간표를 유지합니다",Toast.LENGTH_SHORT).show()
+
+                                }
+                            }
+                        }
+                    }
+                    builder.setPositiveButton("예", listener)
+                    builder.setNegativeButton("아니오", listener)
+                    builder.show()
+                }
+            }
+            else{
+                timeid=date+timenum.toString()
+                val getID1=applicationContext.resources.getIdentifier(timeid,"id",applicationContext.packageName)
+                var tv1=findViewById<TextView>(getID1);
+                if(tv1.text.toString()=="1")
+                tv1.setText(name+"강의실:"+room)
+                tv1.setBackgroundColor(rcolor)
+                tv1.setOnClickListener { var builder=AlertDialog.Builder(this)
+                    builder.setTitle("시간표 삭제")
+                    builder.setMessage("해당 과목을 삭제하시겠습니까 ?")
+                    builder.setIcon(R.drawable.logo)
+                    var listener=object:DialogInterface.OnClickListener{
+                        override fun onClick(dialog: DialogInterface?, which: Int) {
+                            when(which) {
+                                DialogInterface.BUTTON_POSITIVE -> {
+                                    deleteDB(userid,num)
+                                    deleteTimeTable(deletetime)
+
+                                }
+                                DialogInterface.BUTTON_NEGATIVE->{
+                                    Toast.makeText(applicationContext,"해당 시간표를 유지합니다",Toast.LENGTH_SHORT).show()
+
+                                }
+                            }
+                        }
+                    }
+                    builder.setPositiveButton("예", listener)
+                    builder.setNegativeButton("아니오", listener)
+                    builder.show() }
+            }
+        }
+        val getID2=applicationContext.resources.getIdentifier(time2,"id",applicationContext.packageName)
+        var tv2=findViewById<TextView>(getID2);
+        tv2.setText(name+"강의실:"+room)
+        tv2.setBackgroundColor(rcolor)
+        tv2.setOnClickListener { var builder=AlertDialog.Builder(this)
+            builder.setTitle("시간표 삭제")
+            builder.setMessage("해당 과목을 삭제하시겠습니까 ?")
+            builder.setIcon(R.drawable.logo)
+            var listener=object:DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    when(which) {
+                        DialogInterface.BUTTON_POSITIVE -> {
+                            deleteDB(userid,num)
+                            deleteTimeTable(deletetime)
+                        }
+                        DialogInterface.BUTTON_NEGATIVE->{
+                            Toast.makeText(applicationContext,"해당 시간표를 유지합니다",Toast.LENGTH_SHORT).show()
+
+                        }
+                    }
+                }
+            }
+            builder.setPositiveButton("예", listener)
+            builder.setNegativeButton("아니오", listener)
+            builder.show() }
+
+
+
+    }
+    fun RandomColor():Int{
+        val random = Random()
+        return Color.argb(255,random.nextInt(256),random.nextInt(256),random.nextInt(256));
+    }
+    fun checktable(num:String):Boolean {
+        var timelist = TimeDbHelper.findTime(userid)
+        var timedata1 = SubDbHelper.findTime(num)
+        var timedatalist = mutableListOf<String>()
+        if (timedata1 == "nodata") {
+            Log.i("table", "해당 과목 정보가 없습니다.")
+
+            return false
+
+        } else if (timedata1 == "") {
+            Log.i("table", "시간정보가 없습니다.")
+            return true
+        } else {
+            var time = timedata1!!.split(", ", "-", "(").toMutableList()
+            Log.i("timedata1", time.toString())
+            var startt: String = ""
+            var endt: String = ""
+            for (j in 0 until time.size) {
+                time[j] = time[j].replace(" ", "")
+                if (j % 3 == 0) {
+                    startt = time[j]
+                } else if (j % 3 == 1) {
+                    endt = startt.substring(0, 1) + time[j]
+                } else { //9~11  < < / > >
+                    timedatalist.add(startt)
+                    timedatalist.add(endt)
+
+                    Log.i("tabledata", startt) //월02
+                    Log.i("tabledata", endt)   //월04
+                }
+            }
+        }
+        if (timelist != null) {
+            for (i in 0 until timelist.size) {
+                var numdata = timelist.get(i)
+                var timedata = SubDbHelper.findTime(numdata)
+                if (timedata == "nodata") {
+                    Log.i("table", "해당 과목 정보가 없습니다.")
+                } else if (timedata == "") {
+                    Log.i("table", "시간정보가 없습니다.")
+                } else {
+                    var time = timedata!!.split(", ", "-", "(").toMutableList()
+                    Log.i("timedata", time.toString())
+                    var startt: String = ""
+                    var endt: String = ""
+                    for (j in 0 until time.size) {
+                        time[j] = time[j].replace(" ", "")
+                        if (j % 3 == 0) {
+                            startt = time[j]
+                        } else if (j % 3 == 1) {
+                            endt = startt.substring(0, 1) + time[j]
+                        } else {
+                            Log.i("tabledata", startt) //월02
+                            Log.i("tabledata", endt)   //월04
+                            for (i in 0 until timedatalist.size step (2)) {
+                                if (timedatalist[i][0] == startt[0]) {
+                                    if(timedatalist[i].substring(1,3).toInt()>endt.substring(1,3).toInt()||timedatalist[i+1].substring(1,3).toInt()<startt.substring(1,3).toInt()){
+                                        //안겹치는 경우
+                                        continue
+                                    }
+                                    else
+                                        return false
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            return true
+
+        }
+        else{
+            return true
+
+        }
+    }
+
+    fun initTimetable(){
+        // 여기에 userid data
+
+        var timelist=TimeDbHelper.findTime(userid)
+        if (timelist != null) {
+            for(i in 0 until timelist.size){
+                var rcolor=RandomColor()
+                var numdata=timelist.get(i)
+                var timedata=SubDbHelper.findTime(numdata)
+                var namedata=SubDbHelper.findName(numdata)
+
+                if(timedata=="nodata"){
+                    Log.i("table","해당 과목 정보가 없습니다.")
+                }
+                else if(timedata==""){
+                    Log.i("table","시간정보가 없습니다.")
+                }
+                else{
+                    var time = timedata!!.split(", ","-","(").toMutableList()
+                    Log.i("timedata",time.toString())
+                    var startt:String=""
+                    var endt:String=""
+                    var room:String=""
+                    for(j in 0 until time.size){
+                        time[j]=time[j].replace(" ","")
+                        if(j%3==0) {
+                            if(time[j][0] =='월') {
+                                startt = "mon"+time[j].substring(1,time[j].length)
+                            }
+                            else if(time[j][0] =='화') {
+                                startt = "tue"+time[j].substring(1,time[j].length)
+                            }
+                            else if(time[j][0] =='수') {
+                                startt = "wen"+time[j].substring(1,time[j].length)
+                            }
+                            else if(time[j][0] =='목') {
+                                startt = "thu"+time[j].substring(1,time[j].length)
+                            }
+                            else if(time[j][0] =='금') {
+                                startt = "fri"+time[j].substring(1,time[j].length)
+                            }
+
+
+                        }
+                        else if(j%3==1){
+                            endt=startt.substring(0,3)+time[j]
+                        }
+                        else{
+                            room=time[j].substring(0,time[j].length-1)
+                            Log.i("tabledata",startt)
+                            Log.i("tabledata",endt)
+                            Log.i("tabledata",room)
+                            timtableColor(namedata,startt,endt,room,rcolor,numdata,time)
+                        }
+                    }
+                }
+            }
+        }
+        else
+            Toast.makeText(applicationContext,"현재 듣는 과목이 없습니다",Toast.LENGTH_SHORT).show()
+
+    }
     fun init(){
+        SubDbHelper=MYDBHelper_Subject(this)
+        TimeDbHelper= MyDBHelper_TimeTable(this)
+
         binding.recyclerView.layoutManager=
             LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         binding.recyclerView.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
         myAdapter= subjectAdapter(ArrayList())
         myAdapter.itemClickListener=object :subjectAdapter.OnItemClickListener{
             override fun OnItemClick(position: Int) {
-                // 시간표에 추가 user DB 에 듣는과목에 추가
-                Toast.makeText(this@TableActivity,"과목 추가 완료",Toast.LENGTH_SHORT).show()
+                // 시간표에 추가 user DB 에 듣는과목에 추가 todo
+                if(TimeDbHelper.findProduct(userid,myAdapter.items[position].SubNum)) {
+                   Toast.makeText(applicationContext,"이미 추가된 과목입니다.",Toast.LENGTH_SHORT).show()
+            //        initTimetable()
+            //        TimeDbHelper.deleteProduct(myAdapter.items[position].SubName,myAdapter.items[position].SubNum) deletetest 용
+                    TimeDbHelper.getAllRecord()
+                }
+                else{
+                    if(checktable(myAdapter.items[position].SubNum)) {
+                        TimeDbHelper.insertProduct(userid, myAdapter.items[position].SubNum)
+                        Toast.makeText(applicationContext, "과목 추가 완료", Toast.LENGTH_SHORT).show()
+                        initTimetable()
+                        TimeDbHelper.getAllRecord()
+                    }
+                    else{
+                        Toast.makeText(applicationContext,"해당시간에 이미 듣는과목이 있습니다.",Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
         binding.recyclerView.adapter=myAdapter

@@ -59,11 +59,11 @@ class HomeFragment : Fragment() {
 
                 for (t in notice) {
                     var type = t.select("td.gb")
-                    Log.i("ffffffff", type.text())
+//                    Log.i("ffffffff", type.text())
                     var title = t.select("td.subject a")
                     for (ko in title) {
-                        Log.i("ffffffff", ko.text())
-                        Log.i("ffffffff", ko.absUrl("href"))
+//                        Log.i("ffffffff", ko.text())
+//                        Log.i("ffffffff", ko.absUrl("href"))
                         myAdapter.items.add(MyNotice(type.text(), ko.text(), ko.absUrl("href")))
                     }
                     withContext(Dispatchers.Main) {
@@ -79,8 +79,8 @@ class HomeFragment : Fragment() {
 
                     var title = t.select("td.subject a")
                     for (ko in title) {
-                        Log.i("ffffffff", ko.text())
-                        Log.i("ffffffff", ko.absUrl("href"))
+//                        Log.i("ffffffff", ko.text())
+//                        Log.i("ffffffff", ko.absUrl("href"))
                         myAdapter.items.add(MyNotice("장학", ko.text(), ko.absUrl("href")))
                     }
                     withContext(Dispatchers.Main) {
@@ -94,11 +94,11 @@ class HomeFragment : Fragment() {
 
                 for (t in notice) {
                     var type = t.select("td.gb")
-                    Log.i("ffffffff", type.text())
+//                    Log.i("ffffffff", type.text())
                     var title = t.select("td.subject a")
                     for (ko in title) {
-                        Log.i("ffffffff", ko.text())
-                        Log.i("ffffffff", ko.absUrl("href"))
+//                        Log.i("ffffffff", ko.text())
+//                        Log.i("ffffffff", ko.absUrl("href"))
                         myAdapter.items.add(MyNotice(type.text(), ko.text(), ko.absUrl("href")))
                     }
                     withContext(Dispatchers.Main) {
@@ -110,6 +110,7 @@ class HomeFragment : Fragment() {
     }
     fun init(){
         getNotice()
+
         binding.searchv.setOnQueryTextListener(searchViewTextListener)
         binding.htab1RecyclerView.layoutManager=
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
@@ -120,9 +121,17 @@ class HomeFragment : Fragment() {
         myAdapter= HomeRecyclerViewAdapter(ArrayList<MyNotice>())
         myAdapter.nItemClickListener=object:HomeRecyclerViewAdapter.OnItemClickListener{
 
+            //todo
             override fun onItemClick(position: Int) {
-                val intent= Intent(Intent.ACTION_VIEW, Uri.parse(myAdapter.items[position].notice_Url))
-                startActivity(intent)
+                if(myAdapter.filteredNotice.isEmpty()) {
+                    val intent= Intent(Intent.ACTION_VIEW, Uri.parse(myAdapter.items[position].notice_Url))
+                    startActivity(intent)
+                }
+                else{
+                    val intent= Intent(Intent.ACTION_VIEW, Uri.parse(myAdapter.filteredNotice[position].notice_Url))
+                    startActivity(intent)
+                }
+
             }
         }
         binding.htab1RecyclerView.adapter=myAdapter

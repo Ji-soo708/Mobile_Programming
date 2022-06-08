@@ -5,6 +5,7 @@ import android.content.Intent
 import java.io.FileOutputStream
 import android.view.View
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.*
@@ -53,8 +54,16 @@ class CalendarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val email = arguments?.getString("EMAIL")
+        Log.d("캘린더 이메일 ","${email} 도착")
         activity=container!!.context
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
+
+        binding.btnTtable.setOnClickListener{
+            val intent = Intent(activity, TableActivity::class.java)
+            intent.putExtra("calendar email",email)
+            startActivity(intent)
+        }
         initDB()
         init()
         initRecyclerView()
@@ -89,11 +98,12 @@ class CalendarFragment : Fragment() {
         adapter.updateRecycleerView()
     }
 
-    private fun showTimetable() {
-//        val intent = Intent(activity,TableActivity.class)
-//        intent.putExtra("str",tmpStr)
+    //todo
+//    private fun showTimetable() {
+//        val intent = Intent(activity, TableActivity::class.java)
+//        intent.putExtra("calendar email",email)
 //        startActivity(intent)
-    }
+//    }
 
     private fun init() {
         MyDBHelper= MYDBHelper_Schedule(activity)
@@ -139,9 +149,9 @@ class CalendarFragment : Fragment() {
                 Toast.makeText(activity, "Data INSERT FAILED", Toast.LENGTH_SHORT).show()
             }
         }
-        btnTtable.setOnClickListener {
-            showTimetable()
-        }
+//        btnTtable.setOnClickListener {
+//            showTimetable()
+//        }
     }
 
     private fun initRecyclerView(){

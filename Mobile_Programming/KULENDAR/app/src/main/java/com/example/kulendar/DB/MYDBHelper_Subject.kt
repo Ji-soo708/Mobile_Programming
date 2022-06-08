@@ -64,6 +64,44 @@ class MYDBHelper_Subject(val context: Context) : SQLiteOpenHelper(context, DB_NA
         db.close()
         return flag
     }
+    @SuppressLint("Range")
+    fun findTime(num:String): String? {
+        val strsql="select $SubTime from $TABLE_NAME where $SubNum='$num';"
+        val db=readableDatabase
+        val cursor=db.rawQuery(strsql,null)
+        val flag=cursor.count!=0
+        var timeinfo:String?=null
+        if(flag) {
+            while (cursor.moveToNext()) {
+                timeinfo = cursor.getString(cursor.getColumnIndex("SubTime"))
+            }
+        }
+        else
+            timeinfo="nodata"
+        cursor.close()
+        db.close()
+        return timeinfo
+    }
+    @SuppressLint("Range")
+    fun findName(num:String): String {
+        val strsql="select $SubName from $TABLE_NAME where $SubNum='$num';"
+        val db=readableDatabase
+        val cursor=db.rawQuery(strsql,null)
+        val flag=cursor.count!=0
+        var nameinfo:String=""
+        if(flag) {
+            while (cursor.moveToNext()) {
+                nameinfo = cursor.getString(cursor.getColumnIndex("SubName"))
+            }
+        }
+        else {
+            Log.i("findname", "데이터없음")
+        }
+        cursor.close()
+        db.close()
+
+        return nameinfo
+    }
     fun insertProduct(subject:Subject):Boolean{
         val values= ContentValues()
         values.put(SubName,subject.SubName)

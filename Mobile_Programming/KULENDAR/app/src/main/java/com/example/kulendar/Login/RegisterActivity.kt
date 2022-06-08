@@ -1,6 +1,7 @@
 package com.example.kulendar.Login
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,7 @@ import com.example.kulendar.DB.User
 import com.example.kulendar.DB.UserDatabase
 import com.example.kulendar.databinding.ActivityRegisterBinding
 import com.example.kulendar.R
+import com.example.kulendar.TableActivity
 
 class RegisterActivity : AppCompatActivity() {
     lateinit var binding: ActivityRegisterBinding
@@ -111,7 +113,6 @@ class RegisterActivity : AppCompatActivity() {
         val pw : String = binding.regeditPw.text.toString()
         val name : String = binding.regeditName.text.toString()
         val dep : String = binding.regAutoComplete.text.toString()
-
         return User(email, pw,name,dep)
     }
 
