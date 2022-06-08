@@ -57,4 +57,6 @@ class MYDBHelper_User(val context: Context) : SQLiteOpenHelper(context, DB_NAME,
         db!!.execSQL(drop_table)
         onCreate(db)
     }
+
+
 }

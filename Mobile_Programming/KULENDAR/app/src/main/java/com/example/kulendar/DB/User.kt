@@ -1,6 +1,7 @@
 package com.example.kulendar.DB
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 

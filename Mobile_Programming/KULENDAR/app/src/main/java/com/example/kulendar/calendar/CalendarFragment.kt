@@ -2,6 +2,7 @@ package com.example.kulendar.calendar
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,8 @@ class CalendarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val email = arguments?.getString("EMAIL")
+        Log.d("캘린더 이메일 ","${email} 도착")
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_calendar,container,false)
         val button_ttable = root.findViewById<Button>(R.id.btn_ttable)
@@ -25,6 +28,7 @@ class CalendarFragment : Fragment() {
         //버튼 기능
         button_ttable?.setOnClickListener {
             val intent = Intent(activity, TableActivity::class.java)
+            intent.putExtra("calendar email",email)
             startActivity(intent)
         }
         return root
