@@ -32,7 +32,7 @@ class AlarmFragment : Fragment() {
 
 
         //탭레이아웃과 뷰페이저 연결
-        val alarmAdapter = AlarmVPAdapter(this)
+        val alarmAdapter = AlarmVPAdapter(this, email)
         binding.alarmViewPager.adapter = alarmAdapter
         TabLayoutMediator(binding.alarmTabLayout, binding.alarmViewPager) { tab, position ->
             tab.text = tabTitleArray[position]
