@@ -22,37 +22,9 @@ class MYDBHelper_Schedule(val context: Context): SQLiteOpenHelper(context, DB_NA
         val Sch_content="sch_content"
 
     }
-    fun getAllRecord():ArrayList<MyCalendarData>{
-        data.clear()
-        val strsql = "select * from $TABLE_NAME;"
-        val db = readableDatabase
-        val cursor = db.rawQuery(strsql, null)
-        //showRecord(cursor)
-        data.clear()
-        cursor.moveToFirst()
-        if(cursor.getCount()>0){
-            while (cursor.moveToNext()){
-                var pid=cursor.getInt(1).toString()
-                var Fdate=cursor.getString(2).toLong()
-                var str=cursor.getString(3)
-                val tDate = Date(Fdate)
-                val formatYear = SimpleDateFormat("yyyy")
-                val formatMonth = SimpleDateFormat("M")
-                val formatDay = SimpleDateFormat("d")
-                var sYear=formatYear.format(tDate).toInt()
-                var sMonth=formatMonth.format(tDate).toInt()
-                var sDay=formatDay.format(tDate).toInt()
-                data.add(MyCalendarData(sYear,sMonth,sDay,str,pid))
-            }
-        }
-        cursor.close()
-        db.close()
-        return data
-    }
 
     fun getDateRecord(gYear:Int,gMonth:Int,gDay:Int,email:String):ArrayList<MyCalendarData>{
         data.clear()
-//        val strsql="select * from $TABLE_NAME where $Sch_time='$sch_time';"   //이게 문제임
         val strsql="select * from $TABLE_NAME;"
         val db = readableDatabase
         val cursor = db.rawQuery(strsql, null)
