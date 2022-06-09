@@ -53,9 +53,17 @@ class CalendarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val email = arguments?.getString("EMAIL")
+        // Inflate the layout for this fragment
+        val root = inflater.inflate(R.layout.fragment_calendar,container,false)
+        val button_ttable = root.findViewById<Button>(R.id.btn_ttable)
         emailID=email!!
         activity=container!!.context
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
+        binding.btnTtable.setOnClickListener{
+            val intent = Intent(activity, TableActivity::class.java)
+            intent.putExtra("calendar email",email)
+            startActivity(intent)
+        }
         initDB()
         init()
         initRecyclerView()
@@ -88,9 +96,6 @@ class CalendarFragment : Fragment() {
         data.addAll(MyDBHelper.getDateRecord(gYear,gMonth,gDay,emailID))
 //        initRecyclerView()
         adapter.updateRecycleerView()
-    }
-
-    private fun showTimetable() {
     }
 
     private fun init() {
@@ -131,9 +136,6 @@ class CalendarFragment : Fragment() {
             } else {
                 Toast.makeText(activity, "Data INSERT FAILED", Toast.LENGTH_SHORT).show()
             }
-        }
-        btnTtable.setOnClickListener {
-            showTimetable()
         }
     }
 

@@ -43,7 +43,6 @@ class DdayFramgent : Fragment() {
     private var r: Long = 0
     private var resultNumber = 0
     lateinit var activity: Context
-    lateinit var dialog:DatePickerDialog
     lateinit var emailID:String
 
     override fun onCreateView(
@@ -56,7 +55,6 @@ class DdayFramgent : Fragment() {
         binding = FragmentDdayFramgentBinding.inflate(inflater, container, false)
         initDB()
         initLayout()
-        //initData()
         initRecyclerView()
         getAllRecord()
         return binding.root
@@ -86,10 +84,6 @@ class DdayFramgent : Fragment() {
         data.addAll(MyDBHelper.getAllRecord(emailID))
     }
 
-    companion object {
-        const val DATE_DIALOG_ID = 0
-    }
-
     private fun initLayout() {
         MyDBHelper= MyDBHelper_Dday(activity)
         saveBtn = binding.saveButton
@@ -112,7 +106,6 @@ class DdayFramgent : Fragment() {
 
     private val dDateSetListener =
         DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            val calendar = Calendar.getInstance()
             dYear = year
             dMonth = monthOfYear
             dDay = dayOfMonth
@@ -153,9 +146,7 @@ class DdayFramgent : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 var num=viewHolder.adapterPosition
                 //데이터베이스에서 삭제
-//                Toast.makeText(activity,data[num].pid+"hihi"+(num-1).toString(),Toast.LENGTH_SHORT).show()
                 val result=MyDBHelper.deleteProduct(data[num].pid)
-                //val result = false
                 if(result){
 //                    Toast.makeText(activity,"Data DELETE SUCCESS",Toast.LENGTH_SHORT).show()
                 }else{

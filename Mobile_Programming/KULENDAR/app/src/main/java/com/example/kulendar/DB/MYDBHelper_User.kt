@@ -29,9 +29,6 @@ class MYDBHelper_User(val context: Context) : SQLiteOpenHelper(context, DB_NAME,
         val flag = db.insert(TABLE_NAME, null, values)>0
         db.close()
         return flag
-
-
-
     }
     fun getAllRecord(){
         val strsql = "select * from $TABLE_NAME;"

@@ -4,16 +4,32 @@
     <option name="filePathToZoomLevelMap">
       <map>
 
+        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/drawable/border.xml" value="0.159" />
+        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/drawable/edit_round.xml" value="0.103" />
+
+
+
+
+        <entry key="..\:/Users/dvd33/AndroidStudioProjects/mobilep/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_register.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/dvd33/AndroidStudioProjects/mobilep/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/dvd33/AndroidStudioProjects/mobilep/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_table.xml" value="0.4740024183796856" />
+        <entry key="..\:/Users/dvd33/AndroidStudioProjects/mobilep/Mobile_Programming/KULENDAR/app/src/main/res/layout/caleanderitem_list.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/dvd33/AndroidStudioProjects/mobilep/Mobile_Programming/KULENDAR/app/src/main/res/layout/fragment_calendar.xml" value="0.1875" />
+        <entry key="..\:/Users/dvd33/AndroidStudioProjects/mobilep/Mobile_Programming/KULENDAR/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/dvd33/AndroidStudioProjects/mobilep/Mobile_Programming/KULENDAR/app/src/main/res/layout/hometabitem2_list.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/dvd33/AndroidStudioProjects/mobilep/Mobile_Programming/KULENDAR/app/src/main/res/layout/hometabitem_list.xml" value="0.17291666666666666" />
+        <entry key="..\:/Users/dvd33/AndroidStudioProjects/mobilep/Mobile_Programming/KULENDAR/app/src/main/res/layout/subrow.xml" value="0.20416666666666666" />
+
         <entry key="..\:/Users/dvd33/gitfin/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_table.xml" value="0.1" />
         <entry key="..\:/Users/dvd33/gitfin/Mobile_Programming/KULENDAR/app/src/main/res/layout/subrow.xml" value="0.1" />
-
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_main2.xml" value="0.1082427536231884" />
+        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_register.xml" value="0.15534420289855072" />
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_splash.xml" value="0.17708333333333334" />
-        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_table.xml" value="0.17708333333333334" />
+        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/activity_table.xml" value="0.2" />
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/fragment_alarm_tab1.xml" value="0.16458333333333333" />
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/fragment_alarm_tab2.xml" value="0.16458333333333333" />
-        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/fragment_calendar.xml" value="0.16458333333333333" />
+        <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/fragment_calendar.xml" value="0.264" />
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/fragment_dday_framgent.xml" value="0.16458333333333333" />
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/layout/fragment_table.xml" value="0.264" />
         <entry key="..\:/mobile_programming02/Mobile_Programming/KULENDAR/app/src/main/res/menu/navi_menu.xml" value="0.17708333333333334" />

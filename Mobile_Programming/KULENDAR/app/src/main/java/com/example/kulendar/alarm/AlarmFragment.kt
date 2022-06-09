@@ -1,6 +1,7 @@
 package com.example.kulendar.alarm
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,14 +21,22 @@ class AlarmFragment : Fragment() {
         "알림 추가",
         "주요 알리미"
     )
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container:
+        ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        val email = arguments?.getString("EMAIL")!!
+        Log.d("알람 이메일 ","${email} 도착")
+        // Inflate the layout for this fragment
         binding = FragmentAlarmBinding.inflate(inflater, container, false)
+
 
         //탭레이아웃과 뷰페이저 연결
         val alarmAdapter = AlarmVPAdapter(this)
         binding.alarmViewPager.adapter = alarmAdapter
         TabLayoutMediator(binding.alarmTabLayout, binding.alarmViewPager) { tab, position ->
             tab.text = tabTitleArray[position]
+
         }.attach()
 
         return binding.root //setContentView
