@@ -107,6 +107,7 @@ class RegisterActivity : AppCompatActivity() {
     ///////////////회원가입 구현부분////////////////
 
 
+
     private fun getUSer(): User {
         val email: String = binding.regeditId.text.toString() + "@konkuk.ac.kr"
         val pw: String = binding.regeditPw.text.toString()
@@ -114,7 +115,7 @@ class RegisterActivity : AppCompatActivity() {
         val dep: String = binding.regAutoComplete.text.toString()
 
         return User(email, pw, name, dep)
-    }
+
 
 
 

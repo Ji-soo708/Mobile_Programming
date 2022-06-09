@@ -9,26 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/alarm_listtitle"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:text="알림 목록"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="20dp"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-        <!--
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/alarm_RecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-            -->
+            android:layout_height="match_parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
