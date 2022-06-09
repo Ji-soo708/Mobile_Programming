@@ -97,7 +97,7 @@ class TableActivity : AppCompatActivity() {
         }
 
     }
-    fun deleteDB(user:String, num:String){
+    fun deleteDB(user:String, num:String){   //DB 에서 과목삭제
 
         var result=TimeDbHelper.deleteProduct(user,num)
         if(result==true){
@@ -107,7 +107,7 @@ class TableActivity : AppCompatActivity() {
             Toast.makeText(applicationContext,"과목 삭제 실패.",Toast.LENGTH_SHORT).show()
         }
     }
-    fun deleteTimeTable(deletetime:MutableList<String>){
+    fun deleteTimeTable(deletetime:MutableList<String>){ // 시간표에서 과목 삭제
         var startt=""
         var endt=""
         for(j in 0 until deletetime.size) {
@@ -186,7 +186,7 @@ class TableActivity : AppCompatActivity() {
         }
 
     }
-    fun timtableColor(name:String,time1:String,time2:String,room:String,rcolor:Int,num:String,deletetime:MutableList<String>){
+    fun timtableColor(name:String,time1:String,time2:String,room:String,rcolor:Int,num:String,deletetime:MutableList<String>){  // 시간표에 과목 추가 ( timetable textview 색상 및 속성변경 )
         val count=time2.substring(time2.length-1,time2.length).toInt()-time1.substring(time2.length-1,time2.length).toInt()
         val date=time1.substring(0,3)
         val getID=applicationContext.resources.getIdentifier(time1,"id",applicationContext.packageName)
@@ -316,7 +316,7 @@ class TableActivity : AppCompatActivity() {
         val random = Random()
         return Color.argb(255,random.nextInt(256),random.nextInt(256),random.nextInt(256));
     }
-    fun checktable(num:String):Boolean {
+    fun checktable(num:String):Boolean {  // 시간표에 과목 추가시 해당 시간에 이미 다른 과목을 수강중인지 중복체크
         var timelist = TimeDbHelper.findTime(userid)
         var timedata1 = SubDbHelper.findTime(num)
         var timedatalist = mutableListOf<String>()
@@ -394,7 +394,7 @@ class TableActivity : AppCompatActivity() {
         }
     }
 
-    fun initTimetable(){
+    fun initTimetable(){  // timetable 업데이트
         // 여기에 userid data
 
         var timelist=TimeDbHelper.findTime(userid)
