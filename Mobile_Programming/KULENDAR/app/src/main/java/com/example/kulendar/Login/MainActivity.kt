@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val register_intent = Intent(this, RegisterActivity::class.java)
         val register_btn = findViewById<Button>(R.id.btn_register)
 
@@ -72,7 +73,9 @@ class MainActivity : AppCompatActivity() {
 
     //로그인 되면 화면 전환
     private fun startActivity(){
+        val email : String = binding.homeId.text.toString() + "@konkuk.ac.kr"
         val login_intent = Intent(this, MainActivity2::class.java)
+        login_intent.putExtra("Email_Main",email)
         startActivity(login_intent)
     }
 }

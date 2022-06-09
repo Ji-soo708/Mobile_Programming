@@ -50,7 +50,7 @@ class MYDBHelper_Schedule(val context: Context): SQLiteOpenHelper(context, DB_NA
         return data
     }
 
-    fun getDateRecord(gYear:Int,gMonth:Int,gDay:Int):ArrayList<MyCalendarData>{
+    fun getDateRecord(gYear:Int,gMonth:Int,gDay:Int,email:String):ArrayList<MyCalendarData>{
         data.clear()
 //        val strsql="select * from $TABLE_NAME where $Sch_time='$sch_time';"   //이게 문제임
         val strsql="select * from $TABLE_NAME;"
@@ -60,13 +60,13 @@ class MYDBHelper_Schedule(val context: Context): SQLiteOpenHelper(context, DB_NA
         cursor.moveToFirst()
         if(cursor.getCount()>0){
             while (cursor.moveToNext()){
-                var userid=cursor.getInt(0)
+                var userid=cursor.getString(0)
                 var pid=cursor.getInt(1).toString()
                 var str=cursor.getString(3)
                 var date = cursor.getString(2)
                 if(date.equals(gYear.toString()+gMonth.toString()+gDay.toString())) {
-//                    if("$User_id"==userid.toString())
-                    data.add(MyCalendarData(userid, gMonth, gDay, str, pid))
+                    if(email.equals(userid))
+                    data.add(MyCalendarData(gYear, gMonth, gDay, str, pid))
                 }
             }
         }
@@ -77,7 +77,7 @@ class MYDBHelper_Schedule(val context: Context): SQLiteOpenHelper(context, DB_NA
 
     override fun onCreate(db: SQLiteDatabase?) {
         val create_table = "create table if not exists $TABLE_NAME("+
-                "$User_id INTEGER, " +
+                "$User_id text, " +
                 "$PID INTEGER primary key AUTOINCREMENT,"+
                 "$Sch_time text, "+
                 "$Sch_content text);"
@@ -102,7 +102,7 @@ class MYDBHelper_Schedule(val context: Context): SQLiteOpenHelper(context, DB_NA
 
     fun insertProduct(product: Schedule):Boolean{
         val values = ContentValues()
-        values.put(User_id,product.User_id)
+        values.put(User_id,product.email)
         values.put(Sch_time,product.Sch_time)
         values.put(Sch_content,product.Sch_content)
         val db=writableDatabase

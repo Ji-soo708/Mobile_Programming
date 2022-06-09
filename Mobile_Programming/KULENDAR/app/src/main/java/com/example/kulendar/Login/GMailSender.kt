@@ -27,7 +27,8 @@ class GMailSender : Authenticator(){
 
 
     //난수발생
-    var random_number = (1000..9999).random()
+//    var random_number = (1000..9999).random()
+    var random_number = 1000
 
 
     //난수 저장해놓기

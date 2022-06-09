@@ -29,7 +29,6 @@ class DdayFramgent : Fragment() {
     lateinit var adapter:MyDdayAdapter
     private val data:ArrayList<MyDdayData> = ArrayList()
     lateinit var MyDBHelper:MyDBHelper_Dday
-    lateinit var MyUserDBHelper:MYDBHelper_User
     private var saveBtn: Button? = null
     //오늘 연월일 변수
     private var tYear = 0
@@ -45,11 +44,14 @@ class DdayFramgent : Fragment() {
     private var resultNumber = 0
     lateinit var activity: Context
     lateinit var dialog:DatePickerDialog
+    lateinit var emailID:String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val email = arguments?.getString("EMAIL")
+        emailID=email!!
         activity=container!!.context
         binding = FragmentDdayFramgentBinding.inflate(inflater, container, false)
         initDB()
@@ -81,7 +83,7 @@ class DdayFramgent : Fragment() {
 
     private fun getAllRecord(){
         data.clear()
-        data.addAll(MyDBHelper.getAllRecord())
+        data.addAll(MyDBHelper.getAllRecord(emailID))
     }
 
     companion object {
@@ -90,7 +92,6 @@ class DdayFramgent : Fragment() {
 
     private fun initLayout() {
         MyDBHelper= MyDBHelper_Dday(activity)
-        MyUserDBHelper= MYDBHelper_User(activity)
         saveBtn = binding.saveButton
         saveBtn!!.setOnClickListener {
              var picker = DatePickerDialog(activity, dDateSetListener, tYear, tMonth, tDay)
@@ -125,12 +126,11 @@ class DdayFramgent : Fragment() {
             adapter.updateRecycleerView()
 
             //데이터베이스에 데이터추가하기
-            val User_id=MyUserDBHelper.getID()
-            val product=Dday(User_id,dYear,dMonth,dDay,ddayinput)
+            val product=Dday(emailID,dYear,dMonth,dDay,ddayinput)
             val result=MyDBHelper.insertProduct(product)
             if(result){
                 getAllRecord()
-                Toast.makeText(activity,"Data INSERT SUCCESS",Toast.LENGTH_SHORT).show()
+//                Toast.makeText(activity,"Data INSERT SUCCESS",Toast.LENGTH_SHORT).show()
             }else{
                 Toast.makeText(activity,"Data INSERT FAILED",Toast.LENGTH_SHORT).show()
             }
@@ -153,11 +153,11 @@ class DdayFramgent : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 var num=viewHolder.adapterPosition
                 //데이터베이스에서 삭제
-                Toast.makeText(activity,data[num].pid+"hihi"+(num-1).toString(),Toast.LENGTH_SHORT).show()
+//                Toast.makeText(activity,data[num].pid+"hihi"+(num-1).toString(),Toast.LENGTH_SHORT).show()
                 val result=MyDBHelper.deleteProduct(data[num].pid)
                 //val result = false
                 if(result){
-                    Toast.makeText(activity,"Data DELETE SUCCESS",Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(activity,"Data DELETE SUCCESS",Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(activity,"Data DELETE FAILED"+data[viewHolder.adapterPosition].pid+"hihi",Toast.LENGTH_SHORT).show()
                 }

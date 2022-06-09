@@ -3,9 +3,13 @@ package com.example.kulendar.Login
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import com.example.kulendar.DB.UserDatabase
 import com.example.kulendar.R
 import com.example.kulendar.alarm.AlarmFragment
 import com.example.kulendar.calendar.CalendarFragment
+import com.example.kulendar.databinding.ActivityMainBinding
 import com.example.kulendar.dday.DdayFramgent
 import com.example.kulendar.home.HomeFragment
 
@@ -14,6 +18,28 @@ class MainActivity2 : AppCompatActivity() {
 
     /////////////BottomNavigation 액티비티//////////////////
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        //intent작업
+        //activity->fragment는 intent 사용이 불가해서 bundle 씁니다
+        val email = intent.getStringExtra("Email_Main")!!
+        if (email!=null){
+            Log.d("Email_Main2",email)
+        }
+
+        val fragment1=HomeFragment()
+        val fragment2=CalendarFragment()
+        val fragment3=DdayFramgent()
+        val fragment4=AlarmFragment()
+
+        val bundle = Bundle()
+        bundle.putString("EMAIL",email)
+
+        fragment1.arguments=bundle
+        fragment2.arguments=bundle
+        fragment3.arguments=bundle
+        fragment4.arguments=bundle
+
+        //아래 bnv_main.run코드도 수정됐습니다.
 
         //BottomNavigation 구현 코드
 
@@ -30,19 +56,19 @@ class MainActivity2 : AppCompatActivity() {
                 R.id.first -> {
                     // 다른 프래그먼트 화면으로 이동하는 기능
                     val homeFragment = HomeFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, homeFragment).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment1).commit()
                 }
                 R.id.second -> {
                     val calendarFragment = CalendarFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, calendarFragment).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment2).commit()
                 }
                 R.id.third -> {
                     val ddayFragment = DdayFramgent()
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, ddayFragment).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment3).commit()
                 }
                 R.id.forth -> {
                     val alarmFragment = AlarmFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, alarmFragment).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment4).commit()
                 }
             }
             true

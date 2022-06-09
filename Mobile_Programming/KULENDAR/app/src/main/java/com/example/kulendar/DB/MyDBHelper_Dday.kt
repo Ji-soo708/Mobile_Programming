@@ -26,7 +26,7 @@ class MyDBHelper_Dday(val context: Context): SQLiteOpenHelper(context, DB_NAME, 
         val Title="title"
     }
 
-    fun getAllRecord():ArrayList<MyDdayData>{
+    fun getAllRecord(email:String):ArrayList<MyDdayData>{
         val strsql = "select * from $TABLE_NAME;"
         val db = readableDatabase
         val cursor = db.rawQuery(strsql, null)
@@ -37,7 +37,7 @@ class MyDBHelper_Dday(val context: Context): SQLiteOpenHelper(context, DB_NAME, 
             while (cursor.moveToNext()){
                 val calendar = Calendar.getInstance()
                 val dCalendar = Calendar.getInstance()
-                var userid=cursor.getInt(0)
+                var userid=cursor.getString(0)
                 var pid=cursor.getInt(1).toString()
                 var dYear=cursor.getInt(2)
                 var dMonth=cursor.getInt(3)
@@ -48,7 +48,7 @@ class MyDBHelper_Dday(val context: Context): SQLiteOpenHelper(context, DB_NAME, 
                 d = dCalendar.timeInMillis
                 r = (d - t) / (24 * 60 * 60 * 1000)
                 resultNumber = r.toInt()
-//                if("$User_id"==userid.toString())
+                if(email.equals(userid))
                     data.add(MyDdayData(resultNumber, str, pid))
             }
         }
@@ -76,7 +76,7 @@ class MyDBHelper_Dday(val context: Context): SQLiteOpenHelper(context, DB_NAME, 
 
     fun insertProduct(product: Dday):Boolean{
         val values = ContentValues()
-        values.put(User_id,product.User_id)
+        values.put(User_id,product.email)
         values.put(dYear,product.dYear)
         values.put(dMonth,product.dMonth)
         values.put(dDay,product.dDay)

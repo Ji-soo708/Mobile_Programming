@@ -30,8 +30,6 @@ class CalendarFragment : Fragment() {
     lateinit var adapter: MyCalendarAdapter
     private val data:ArrayList<MyCalendarData> = ArrayList()
     lateinit var MyDBHelper: MYDBHelper_Schedule
-    lateinit var MyUserDBHelper: MYDBHelper_User
-    lateinit var str: String
     lateinit var calendarView: CalendarView
     lateinit var saveBtn:Button
     lateinit var contextEditText: EditText
@@ -48,11 +46,14 @@ class CalendarFragment : Fragment() {
     var chMonth=sMonth.toInt()
     var chDay=sDay.toInt()
     lateinit var activity: Context
+    lateinit var emailID:String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val email = arguments?.getString("EMAIL")
+        emailID=email!!
         activity=container!!.context
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
         initDB()
@@ -84,20 +85,16 @@ class CalendarFragment : Fragment() {
     private fun getDateRecord(gYear:Int,gMonth:Int,gDay:Int){
         data.clear()
         val str = gYear.toString()+gMonth.toString()+gDay.toString()
-        data.addAll(MyDBHelper.getDateRecord(gYear,gMonth,gDay))
+        data.addAll(MyDBHelper.getDateRecord(gYear,gMonth,gDay,emailID))
 //        initRecyclerView()
         adapter.updateRecycleerView()
     }
 
     private fun showTimetable() {
-//        val intent = Intent(activity,TableActivity.class)
-//        intent.putExtra("str",tmpStr)
-//        startActivity(intent)
     }
 
     private fun init() {
         MyDBHelper= MYDBHelper_Schedule(activity)
-        MyUserDBHelper= MYDBHelper_User(activity)
 //        MyDBHelper.onUpgrade(MyDBHelper.writableDatabase,0,0)
     // UI값 생성
         calendarView=binding.calendarView    //달력
@@ -122,19 +119,15 @@ class CalendarFragment : Fragment() {
 
         saveBtn.setOnClickListener {
             //저장하기 코드
-            val User_id = MyUserDBHelper.getID()
-            Toast.makeText(activity,User_id.toString(), Toast.LENGTH_SHORT).show()
             val cdate=chYear.toString()+chMonth.toString()+chDay.toString() //변경된 날짜
             val str = contextEditText.text.toString()
             contextEditText.text=null
-//            Toast.makeText(activity,"saveBtn : " + cdate, Toast.LENGTH_SHORT).show()
-            val product = Schedule(User_id, cdate, str)
+            val product = Schedule(emailID, cdate, str)
             val result = MyDBHelper.insertProduct(product)
             if (result) {
                 getDateRecord(chYear,chMonth,chDay)
                 adapter.updateRecycleerView()
-//                initRecyclerView()
-                Toast.makeText(activity, "Data INSERT SUCCESS", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(activity, "Data INSERT SUCCESS", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(activity, "Data INSERT FAILED", Toast.LENGTH_SHORT).show()
             }
@@ -162,9 +155,9 @@ class CalendarFragment : Fragment() {
                 //삭제하기 코드
                 val result=MyDBHelper.deleteProduct(data[num].pid)
                 if(result){
-                    Toast.makeText(activity,"Data DELETE SUCCESS",Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(activity,"Data DELETE SUCCESS",Toast.LENGTH_SHORT).show()
                 }else{
-                    Toast.makeText(activity,"Data DELETE FAILED"+data[viewHolder.adapterPosition].pid+"hihi",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity,"Data DELETE FAILED",Toast.LENGTH_SHORT).show()
                 }
                 adapter.removeItem(viewHolder.adapterPosition)
                 data.clear()
