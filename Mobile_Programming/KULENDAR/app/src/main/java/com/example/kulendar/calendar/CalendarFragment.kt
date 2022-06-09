@@ -56,8 +56,13 @@ class CalendarFragment : Fragment() {
     ): View? {
         val email = arguments?.getString("EMAIL")
         Log.d("캘린더 이메일 ","${email} 도착")
+
+        // Inflate the layout for this fragment
+        val root = inflater.inflate(R.layout.fragment_calendar,container,false)
+        val button_ttable = root.findViewById<Button>(R.id.btn_ttable)
         activity=container!!.context
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
+
 
         binding.btnTtable.setOnClickListener{
             val intent = Intent(activity, TableActivity::class.java)

@@ -4,6 +4,9 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+
+import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +53,13 @@ class DdayFramgent : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val email = arguments?.getString("EMAIL")
+        Log.d("디데이 이메일 ","${email} 도착")
+        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_dday_framgent, container, false)
+
         activity=container!!.context
         binding = FragmentDdayFramgentBinding.inflate(inflater, container, false)
         initDB()
@@ -169,5 +179,6 @@ class DdayFramgent : Fragment() {
 
         val itemTouchHelper= ItemTouchHelper(simpleItemTouchCallback)
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+
     }
 }

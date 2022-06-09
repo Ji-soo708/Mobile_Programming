@@ -3,11 +3,11 @@ package com.example.kulendar
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
 
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -96,6 +96,10 @@ class TableActivity : AppCompatActivity() {
             main()
         }
 
+        val email = intent.getStringExtra("calendar email")!!
+        if(email != null){
+            Log.d("도착 완료: ",email)
+        }
     }
     fun deleteDB(user:String, num:String){   //DB 에서 과목삭제
 
@@ -311,6 +315,7 @@ class TableActivity : AppCompatActivity() {
 
 
 
+
     }
     fun RandomColor():Int{
         val random = Random()
@@ -456,6 +461,7 @@ class TableActivity : AppCompatActivity() {
             Toast.makeText(applicationContext,"현재 듣는 과목이 없습니다",Toast.LENGTH_SHORT).show()
 
     }
+
     fun init(){
         SubDbHelper=MYDBHelper_Subject(this)
         TimeDbHelper= MyDBHelper_TimeTable(this)
@@ -766,4 +772,9 @@ class TableActivity : AppCompatActivity() {
 
         }
     }
+
+
 }
+
+}
+
