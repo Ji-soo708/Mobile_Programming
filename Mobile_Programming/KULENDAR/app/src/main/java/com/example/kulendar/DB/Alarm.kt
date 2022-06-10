@@ -8,5 +8,6 @@ data class Alarm (
     @PrimaryKey var notification_ID:Int,
     var date:String,
     var title:String,
-    var repeatOnOff:Int
+    var repeatOnOff:Int,
+    var email:String
 )

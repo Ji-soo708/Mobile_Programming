@@ -65,12 +65,13 @@
                 android:layout_marginTop="15dp"
                 app:layout_constraintTop_toBottomOf="@id/alarm_title"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/alarm_linear2"
-        android:gravity="center_horizontal">
+        <LinearLayout
+            android:id="@+id/alarm_linear3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/alarm_linear2"
+            android:gravity="center_horizontal">
             <Button
                 android:id="@+id/saveAlarmBtn"
                 android:layout_width="100dp"
@@ -80,9 +81,22 @@
                 android:text="알림 등록"
                 android:gravity="center_vertical"
                 android:layout_marginTop="40dp"
-                app:layout_constraintTop_toBottomOf="@id/alarm_linear2"
+                app:layout_constraintBottom_toTopOf="@id/alarm_linear2"
                 app:layout_constraintStart_toStartOf="parent" />
-    </LinearLayout>
+
+            <Button
+                android:id="@+id/testAlarmBtn"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:backgroundTint="#8CC549"
+                android:textColor="@color/white"
+                android:text="알림 기능 테스트"
+                android:gravity="center_vertical"
+                android:layout_marginTop="40dp"
+                app:layout_constraintTop_toBottomOf="@id/alarm_linear3"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

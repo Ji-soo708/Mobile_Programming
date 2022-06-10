@@ -4,11 +4,8 @@ import androidx.room.*
 
 @Dao
 interface AlarmDao {
-    @Query("SELECT * FROM AlarmTable")
-    fun getAll(): List<Alarm>
-
-    @Query("SELECT * FROM AlarmTable WHERE notification_ID = :notification_ID")
-    fun getAlarm(notification_ID:Int) : Alarm?
+    @Query("SELECT * FROM AlarmTable WHERE email = :email")
+    fun getAll(email:String): List<Alarm>
 
     @Insert
     fun insertAlarm(alarm:Alarm)

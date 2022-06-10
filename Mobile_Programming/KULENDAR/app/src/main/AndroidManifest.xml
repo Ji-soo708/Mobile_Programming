@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+
     <application
         android:name=".Login.ApplicationClass"
         android:allowBackup="true"
@@ -49,6 +51,9 @@
 <!--            </intent-filter>-->
         </activity>
         <activity android:name=".TableActivity" />
+        
+        <receiver android:name=".alarm.AlarmReceiver"/>
+
     </application>
 
 </manifest>

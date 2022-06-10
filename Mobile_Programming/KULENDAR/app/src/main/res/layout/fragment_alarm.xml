@@ -7,6 +7,7 @@
     tools:context=".alarm.AlarmFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/email_data_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

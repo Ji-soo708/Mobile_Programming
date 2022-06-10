@@ -23,16 +23,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kulendar.DB.Alarm
 import com.example.kulendar.DB.AlarmDatabase
+import com.example.kulendar.Login.MainActivity2
 import com.example.kulendar.R
 import java.io.File
 import java.util.*
 import javax.mail.Quota
 
 class AlarmTab2Fragment : Fragment() {
+
+    lateinit var email:String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        var result = arguments?.getString("EMAIL")
+        email = result.toString()
+        Log.d("알람2 이메일 ","${email} 도착")
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_alarm_tab2, container, false)
     }
@@ -40,12 +49,15 @@ class AlarmTab2Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var user_email = email
+
         var alarmRecyclerView = view.findViewById<RecyclerView>(R.id.alarm_RecyclerView)
 
         var alarmDB = AlarmDatabase.getInstance(requireContext())
         var alarmList = mutableListOf<Alarm>()
 
-        var savedAlarm = alarmDB!!.alarmDao().getAll()
+
+        var savedAlarm = alarmDB!!.alarmDao().getAll(user_email)
         if(savedAlarm.isNotEmpty()) {
             alarmList.addAll(savedAlarm)
         }
@@ -63,35 +75,10 @@ class AlarmTab2Fragment : Fragment() {
 
                     view.findViewById<ImageView>(R.id.repeatImage).setImageResource(R.drawable.star_on)
 
-                    var dateArr = alarmData.date.split(".")
-                    var selectedDate = Calendar.getInstance()
-                    selectedDate.set(dateArr[0].toInt(), dateArr[1].toInt() - 1, dateArr[2].toInt(), 21,0,0)
+                    (activity as MainActivity2).repeatAlarm(alarmData)
 
-                    var currentDate = Calendar.getInstance()
-
-                    var calcuDate = ((currentDate.timeInMillis - selectedDate.timeInMillis)/86400000).toInt() + 1
-
-                    var intent = Intent(requireContext(), AlarmReceiver::class.java)
-                    intent.putExtra("nid",alarmData.notification_ID)
-                    intent.putExtra("date",alarmData.date)
-                    intent.putExtra("title",alarmData.title)
-
-                    var alarmManager:AlarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-                    for (i:Int in 1..calcuDate step(1)) {
-                        var pendingIntent = PendingIntent.getBroadcast(
-                            requireContext(),
-                            alarmData.notification_ID + i,
-                            intent,
-                            PendingIntent.FLAG_UPDATE_CURRENT
-                        )
-
-                        alarmManager.set(
-                            AlarmManager.RTC_WAKEUP,
-                            currentDate.timeInMillis, // 알림 발동 시간
-                            pendingIntent
-                        )
-                    }
+                    alarmDB.alarmDao().update(alarmData)
+                    adapter.notifyDataSetChanged()
 
                     alarmDB.alarmDao().update(alarmData)
                     adapter.notifyDataSetChanged()
