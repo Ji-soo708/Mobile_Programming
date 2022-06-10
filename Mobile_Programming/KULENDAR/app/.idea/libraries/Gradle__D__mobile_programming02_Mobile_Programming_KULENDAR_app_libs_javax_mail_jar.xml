@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: D./mobile_programming02/Mobile_Programming/KULENDAR/app/libs/javax.mail.jar">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/javax.mail.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

@@ -15,6 +15,7 @@ class SplashActivity : AppCompatActivity() {
         loadSplashScreen()
     }
 
+    //스플래쉬 2초간 수행
     private fun loadSplashScreen(){
         Handler().postDelayed({
             // You can declare your desire activity here to open after finishing splash screen. Like MainActivity
